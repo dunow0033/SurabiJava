@@ -167,25 +167,80 @@ public class StoreInformation {
 	
 	public void selectItem()
 	{
+		order = new HashMap<Integer, Food>();
 		Map<Integer, Food> choiceMap = new HashMap<Integer, Food>();
 		
-		System.out.println("Ok, great, what would you like to select: ");
-		System.out.println();
-		System.out.println("   Option\t\t\t\tPrice");
-		System.out.println("--------------------------");
+			System.out.println("Current menu:  ");
+			System.out.println();
+			System.out.println("   Option\t\t\t\tPrice");
+			System.out.println("--------------------------");
 		
-		int counter = 1;
+			int counter = 1;
+			int quantity;
 		
-		for(Food food : menu)
-		{
-			String formattedPrice = String.format("%.2f", food.getPrice());
-			System.out.printf("%d. %-37s%-10s%n", counter++, food.getFoodName(), formattedPrice);
-			choiceMap.put(counter, food);
+			for(Food food : menu)
+			{
+				String formattedPrice = String.format("%.2f", food.getPrice());
+				System.out.printf("%d. %-37s%-10s%n", counter++, food.getFoodName(), formattedPrice);
+				choiceMap.put(counter, food);
+			}
+		
+			System.out.println();
+			System.out.println("Please make a selection:  ");
+			int choice = sc.nextInt();
+			Food foodChoice = null;
+			
+		while(true) {
+		
+			for(Map.Entry<Integer, Food> entry : choiceMap.entrySet()) {
+				if((entry.getKey() - 1) == choice) {
+					Food selectedFood = entry.getValue();
+					System.out.println("Great, you selected " + selectedFood.getFoodName());
+					foodChoice = selectedFood;
+					break;
+				}
+			}
+			
+			System.out.println("How many would you like to order? ");
+			quantity = sc.nextInt();
+		
+			order.put(quantity, foodChoice);
+		
+		
+			System.out.println("Great, you have ordered " + quantity + " orders of " + foodChoice.getFoodName());
+			System.out.println("Would you like to order anything else?  ");
+		
+			String answer = sc.next();
+		
+			if(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes"))
+			{
+				System.out.println("Great, what else would you like to order? ");
+				System.out.println();
+				System.out.println("Current menu:  ");
+				System.out.println();
+				System.out.println("   Option\t\t\t\tPrice");
+				System.out.println("--------------------------");
+			
+				counter = 1;
+			
+				for(Food food : menu)
+				{
+					String formattedPrice = String.format("%.2f", food.getPrice());
+					System.out.printf("%d. %-37s%-10s%n", counter++, food.getFoodName(), formattedPrice);
+					choiceMap.put(counter, food);
+				}
+			
+				System.out.println();
+				System.out.println("Please make a selection:  ");
+			
+				choice = sc.nextInt();
+				foodChoice = null;
+			}
+			else
+			{
+				break;
+			}
 		}
-		
-		System.out.println();
-		System.out.println();
-		
 	}
 	
 //	public void adminListfoods()
