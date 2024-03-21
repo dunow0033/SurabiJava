@@ -170,7 +170,8 @@ public class StoreInformation {
 		Map<Integer, Food> choiceMap = new HashMap<Integer, Food>();
 		
 		System.out.println("Ok, great, what would you like to select: ");
-		System.out.println("Option\t\t\t\tPrice");
+		System.out.println();
+		System.out.println("   Option\t\t\t\tPrice");
 		System.out.println("--------------------------");
 		
 		int counter = 1;
@@ -178,7 +179,8 @@ public class StoreInformation {
 		for(Food food : menu)
 		{
 			String formattedPrice = String.format("%.2f", food.getPrice());
-			System.out.printf("%d. %-32s%-10s%n", counter++, food.getFoodName(), formattedPrice);
+			System.out.printf("%d. %-37s%-10s%n", counter++, food.getFoodName(), formattedPrice);
+			choiceMap.put(counter, food);
 		}
 		
 		System.out.println();
