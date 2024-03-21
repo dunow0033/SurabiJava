@@ -15,7 +15,7 @@ public class StoreInformation {
 	Scanner sc;
 	int nooffood;
 	
-	public static Map<Integer, Food> order;
+	public static Map<Integer, Food> order = new HashMap<Integer, Food>();
 	
 	public static ArrayList<Food> menu;
 	
@@ -167,7 +167,6 @@ public class StoreInformation {
 	
 	public void selectItem()
 	{
-		order = new HashMap<Integer, Food>();
 		Map<Integer, Food> choiceMap = new HashMap<Integer, Food>();
 		
 			System.out.println("Current menu:  ");
@@ -240,6 +239,33 @@ public class StoreInformation {
 			{
 				break;
 			}
+		}
+	}
+	
+	public void viewCurrentOrder(String name)
+	{
+		int counter = 1;
+		
+		if(order.isEmpty())
+		{
+			System.out.println("Sorry, " + name + " you haven't added anything to your order yet!!  Please "
+					+ "look at the menu and make some selections!!");
+			System.out.println();
+			selectItem();
+		} else {
+			
+			System.out.println("Here is your current order, " + name + ":");
+			System.out.println();
+			System.out.println("   Entree\t\t\t\tQuantity\t\t\t\tPrice");
+			System.out.println("--------------------------");
+			
+			for(Map.Entry<Integer, Food> entry : order.entrySet()) {
+				String formattedPrice = String.format("%.2f", entry.getValue().getPrice());
+				
+				System.out.printf("%d. %-37s%-10s%-15s%n", counter++, entry.getValue().getFoodName(), 
+						entry.getKey(), formattedPrice);
+			}
+			System.out.println();
 		}
 	}
 	

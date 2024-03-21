@@ -122,7 +122,8 @@ public class ValidateUser {
 		{
 			System.out.println("1. View Menu ");
 			System.out.println("2. Select an Item ");
-			System.out.println("3. Exit");
+			System.out.println("3. View your current order ");
+			System.out.println("4. Exit");
 			
 			option = sc.nextInt();
 			
@@ -135,6 +136,9 @@ public class ValidateUser {
 					storeinfo.selectItem();
 					break;
 				case 3:
+					storeinfo.viewCurrentOrder(name);
+					break;
+				case 4:
 					System.out.println("Thank you....bye!!");
 					looping = false;
 					System.exit(0);
